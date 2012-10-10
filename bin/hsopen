@@ -1,0 +1,23 @@
+#!/bin/dash
+
+# hsopen -- open haskell module with plumber
+#
+# Looks for the haskell module file given at $1, 
+# slowly going up the dir tree from the point given at $2.
+# Exits when the users's home directory has been searched.
+
+filename=`echo $1 | sed -e 's/\./\//g'`.hs
+wdir=$2
+
+while [ "$wdir" != "/home" ]; do
+  found=""
+  found=`find $wdir -iname *.hs | grep  "$filename" | head -n 1`
+  if [ "$found" ]; then
+	plumb -d edit $found;
+	exit 0;
+  fi
+  parent=`dirname $wdir`
+  wdir=$parent
+done
+
+exit 1;

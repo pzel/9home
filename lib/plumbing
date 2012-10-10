@@ -1,0 +1,31 @@
+editor = acme
+web = 'links -dump'
+include fileaddr
+
+
+# catch haskell module syntax and open appropriate file
+type is text
+data matches '[A-Z][a-z]+\.([A-Z][a-z]+\.?)+'
+plumb start hsopen $0 $wdir
+
+# catch haskell files and furnish menu with appropriate Tags. TODO
+type is text
+data matches '([a-zA-Z¡-￿0-9/_\-]+\.hs)('$addr')?'
+arg isfile $0
+data set $file
+plumb to edit
+
+type is text
+data matches '\.?sqlite'
+arg isfile $0
+plumb start win sqlite3 -header $file
+
+# .h files are looked up in /usr/local/include and passed to edit
+type is text
+data matches '([a-zA-Z¡-￿0-9/_\-]+\.h)('$addr')?'
+arg isfile	/usr/local/include/$1
+data set	$file
+attr add	addr=$3
+plumb to edit
+
+
