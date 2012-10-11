@@ -1,10 +1,14 @@
-#!/bin/dash
+#!/bin/sh
 
 # hsopen -- open haskell module with plumber
 #
 # Looks for the haskell module file given at $1, 
-# slowly going up the dir tree from the point given at $2.
-# Exits when the users's home directory has been searched.
+# going up the dir tree from the point given at $2.
+
+if [ "$#" -ne 2 ] || ! [ -d "$2" ]; then
+	echo "Usage: $0 <Haskell.Module.File> <search-path>" >&2
+	exit 1
+fi
 
 filename=`echo $1 | sed -e 's/\./\//g'`.hs
 wdir=$2

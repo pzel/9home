@@ -3,7 +3,7 @@ web = 'links -dump'
 include fileaddr
 
 
-# catch haskell module syntax and open appropriate file
+# Catch haskell module syntax and open appropriate file. See hsopen
 type is text
 data matches '[A-Z][a-z]+\.([A-Z][a-z]+\.?)+'
 plumb start hsopen $0 $wdir

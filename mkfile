@@ -1,5 +1,8 @@
-update:
-	mkdir -p ./bin
-	mkdir -p ./lib
-	cp -r $HOME/bin/* ./bin
-	cp -r $HOME/lib/* ./lib
+MKSHELL=$PLAN9/bin/rc
+install:
+	mkdir -p $HOME/bin
+	mkdir -p $HOME/lib
+	cp ./bin/* $HOME/bin
+	cp ./lib/* $HOME/lib 
+	for (f in `{lc ./bin/*}) chmod +x $HOME/bin/$f
+	
