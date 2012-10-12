@@ -12,7 +12,7 @@ fi
 unset LS_COLORS
 unset LESSCLOSE
 unset LESSOPEN
-PAGER=nobs export MANPAGER
+PAGER=nobs export PAGER
 MANPAGER=nobs export MANPAGER
 
 FIXFONT=$PLAN9/font/lucsans/typeunicode.7.font
