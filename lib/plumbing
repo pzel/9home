@@ -1,31 +1,63 @@
 editor = acme
-web = 'links -dump'
 include fileaddr
 
-
-# Catch haskell module syntax and open appropriate file. See hsopen
+# haskell modules get searched for with hsopen
 type is text
 data matches '[A-Z][a-z]+\.([A-Z][a-z]+\.?)+'
 plumb start hsopen $0 $wdir
 
-# catch haskell files and furnish menu with appropriate Tags. TODO
-type is text
-data matches '([a-zA-Z¡-￿0-9/_\-]+\.hs)('$addr')?'
-arg isfile $0
-data set $file
-plumb to edit
-
+# sqlite3 databases get their own shell
 type is text
 data matches '\.?sqlite'
 arg isfile $0
 plumb start win sqlite3 -header $file
 
-# .h files are looked up in /usr/local/include and passed to edit
+# urls go to web browser
 type is text
-data matches '([a-zA-Z¡-￿0-9/_\-]+\.h)('$addr')?'
-arg isfile	/usr/local/include/$1
+data matches '(https?|ftp|file|gopher|mailto|news|nntp|telnet|wais|prospero)://[a-zA-Z0-9_@\-]+([.:][a-zA-Z0-9_@\-]+)*/?[a-zA-Z0-9_?,%#~&/\-+=]+([:.][a-zA-Z0-9_?,%#~&/\-+=]+)*'
+plumb to web
+plumb start web $0
+
+# image files go to eye of gnome <bleh>
+type is text
+data matches '[a-zA-Z¡-￿0-9_\-./]+'
+data matches '([a-zA-Z¡-￿0-9_\-./]+)\.(jpe?g|JPE?G|gif|GIF|tiff?|TIFF?|ppm|bit|png|PNG)'
+arg isfile	$0
+plumb to image
+plumb start eog $file
+
+# postscript/pdf/dvi go to evince
+type is text
+data matches '[a-zA-Z¡-￿0-9_\-./]+'
+data matches '([a-zA-Z¡-￿0-9_\-./]+)\.(ps|PS|eps|EPS|pdf|PDF|dvi|DVI)'
+arg isfile	$0
+plumb start 9 evince $file
+
+# existing files, possibly tagged by line number, go to editor
+type is text
+data matches '([.a-zA-Z¡-￿0-9_/\-]*[a-zA-Z¡-￿0-9_/\-])('$addr')?'
+arg isfile	$1
 data set	$file
 attr add	addr=$3
 plumb to edit
+plumb client $editor
 
+# existing files tagged by line number:columnumber or linenumber.columnumber, go to editor
+type is text
+data matches '([.a-zA-Z¡-￿0-9_/\-]*[a-zA-Z¡-￿0-9_/\-])'$twocolonaddr'
+arg isfile     $1
+data set       $file
+attr add       addr=$2-#1+#$3
+plumb to edit
+plumb client $editor
 
+# man index entries are synthesized
+type is text
+data matches '([a-zA-Z¡-￿0-9_\-./]+)\(([1-8])\)'
+plumb start rc -c 'man '$2' '$1' >[2=1] | nobs | plumb -i -d edit -a ''action=showdata filename=/man/'$1'('$2')'''
+
+# email addresses get a new mail window
+type is text
+data matches '[a-zA-Z0-9_+.\-]+@[a-zA-Z0-9_+.\-]*'
+plumb to sendmail
+plumb start thunderbird -compose $0
