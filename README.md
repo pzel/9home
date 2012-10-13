@@ -1,12 +1,13 @@
 9home
 =====
-helper scripts for [acme](http://acme.cat-v.org/)  from [Plan 9 from User Space](http://swtch.com/plan9port/)
+helper scripts for acme  from Plan 9 from User Space
 -----
 
 Usage
 -----
-`mk install` copies the scripts into your $HOME/bin and plumbing rules into $HOME/lib
-**WARNING** This will overwrite your existing $HOME/lib/plumbing. Make backups or copy the rules manually.
+`mk install` copies the scripts into your $HOME/bin and the plumbing rules into $HOME/lib.
+
+This will overwrite your existing $HOME/lib/plumbing. Make backups or copy the rules manually.
 
 
 Licence
