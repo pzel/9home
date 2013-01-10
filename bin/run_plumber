@@ -1,0 +1,3 @@
+#!/bin/sh
+. $HOME/bin/p9env
+(cd $HOME && plumber)

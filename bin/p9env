@@ -1,0 +1,14 @@
+#!/bin/sh
+PLAN9=/usr/local/plan9 export PLAN9
+PATH=$PATH:$PLAN9/bin export PATH
+
+unset LS_COLORS
+unset LESSCLOSE
+unset LESSOPEN
+PAGER=nobs export PAGER
+MANPAGER=nobs export MANPAGER
+
+FIXFONT=$PLAN9/font/lucsans/typeunicode.7.font  export FIXFONT
+VARFONT=$PLAN9/font/lucsans/unicode.7.font  export VARFONT
+font=$FIXFONT export font
+SHELL=$PLAN9/bin/rc export SHELL

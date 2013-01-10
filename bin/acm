@@ -1,6 +1,5 @@
 #!/bin/sh
-PLAN9=/usr/local/plan9 export PLAN9
-PATH=$PATH:$PLAN9/bin export PATH
+. $HOME/bin/p9env
 
 ACME_MOUNT=/tmp/$USER.acmefs
 mkdir -p $ACME_MOUNT
@@ -9,16 +8,5 @@ if [ -f $HOME/acme.dump ] ; then
   DUMPCMD="-l $HOME/acme.dump"
 fi
 
-unset LS_COLORS
-unset LESSCLOSE
-unset LESSOPEN
-PAGER=nobs export PAGER
-MANPAGER=nobs export MANPAGER
-
-FIXFONT=$PLAN9/font/lucsans/typeunicode.7.font
-VARFONT=$PLAN9/font/lucsans/unicode.7.font
-SHELL=$PLAN9/bin/rc
-
 sleep 1 && xseticon -name acme $HOME/lib/acme.png &
-(cd $HOME && plumber) &
 shell=$SHELL acme -a -f $VARFONT -F $FIXFONT $DUMPCMD -m $ACME_MOUNT && killall plumber
