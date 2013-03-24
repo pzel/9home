@@ -31,7 +31,7 @@ type is text
 data matches '[a-zA-Z¡-￿0-9_\-./]+'
 data matches '([a-zA-Z¡-￿0-9_\-./]+)\.(ps|PS|eps|EPS|pdf|PDF|dvi|DVI)'
 arg isfile	$0
-plumb start 9 evince $file
+plumb start evince $file
 
 # existing files, possibly tagged by line number, go to editor
 type is text

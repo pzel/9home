@@ -1,5 +1,6 @@
 #!/bin/sh
 . $HOME/bin/p9env
+run_plumber
 
 ACME_MOUNT=/tmp/$USER.acmefs
 mkdir -p $ACME_MOUNT
