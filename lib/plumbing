@@ -32,6 +32,14 @@ arg isfile	$0
 plumb to image
 plumb start eog $file
 
+# movies go to mplayer
+type is text
+data matches '[a-zA-Z¡-￿0-9_\-./]+'
+data matches '([a-zA-Z¡-￿0-9_\-./]+)\.(avi|AVI|flv|mpe?g|MPE?G)'
+arg isfile	$0
+plumb to movie
+plumb start mplayer $file
+
 # postscript/pdf/dvi go to evince
 type is text
 data matches '[a-zA-Z¡-￿0-9_\-./]+'
