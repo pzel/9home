@@ -11,5 +11,5 @@ MANPAGER=nobs export MANPAGER
 FIXFONT=$PLAN9/font/lucsans/typeunicode.7.font  export FIXFONT
 VARFONT=$PLAN9/font/lucsans/unicode.7.font  export VARFONT
 font=$FIXFONT export font
-SHELL=/bin/sh export SHELL
+SHELL=/bin/bash export SHELL
 #SHELL=$PLAN9/bin/rc export SHELL #sorry, rc
