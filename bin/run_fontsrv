@@ -1,0 +1,8 @@
+#!/bin/sh
+. $HOME/bin/p9env
+
+killall fontsrv 2>&1 > /dev/null
+mkdir -p /tmp/fontsrv 2>&1 > /dev/null
+fontsrv -m /tmp/fontsrv 2>&1 > /dev/null &
+
+sleep 1
