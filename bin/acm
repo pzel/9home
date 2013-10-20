@@ -12,7 +12,7 @@ if [ -f $HOME/acme.dump ] ; then
 fi
 
 SHELL=rc
-FIXFONT="/mnt/font/Inconsolata/10a/font"
+FIXFONT="/mnt/font/DejaVu Sans Mono/9a/font"
 #VARFONT="/tmp/fontsrv/Droid Sans/10a/font"
 
 sleep 1 && xseticon -name acme $HOME/lib/acme.png &
