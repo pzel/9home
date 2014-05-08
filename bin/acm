@@ -1,14 +1,14 @@
 #!/bin/sh
-# . $HOME/bin/p9env
 
+DUMPFILE="$1"
 # run_fontsrv
 run_plumber
 
 ACME_MOUNT=/tmp/$USER.acmefs
 mkdir -p $ACME_MOUNT
 
-if [ -f $HOME/acme.dump ] ; then
-  DUMPCMD="-l $HOME/acme.dump"
+if [ -f "$DUMPFILE" ] ; then
+  DUMPCMD="-l $DUMPFILE"
 fi
 
 SHELL=/bin/bash --rcfile $HOME/.profile
