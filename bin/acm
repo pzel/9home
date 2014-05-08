@@ -14,5 +14,6 @@ fi
 SHELL=/bin/bash --rcfile $HOME/.profile
 FIXFONT=$PLAN9/font/lucsans/typeunicode.7.font  export FIXFONT
 VARFONT=$PLAN9/font/lucsans/unicode.8.font export VARFONT
+INSIDE_ACME=true export INSIDE_ACME
 
 shell=$SHELL acme -a -f "$FIXFONT" -F "$FIXFONT" $DUMPCMD -m $ACME_MOUNT && killall plumber
