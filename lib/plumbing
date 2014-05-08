@@ -1,51 +1,60 @@
 editor = acme
 include fileaddr
 
-# haskell modules get searched for with hsopen
-type is text
-data matches '[A-Z][a-z]+\.([A-Z][a-z]+\.?)+'
-plumb start hsopen $0 $wdir
+## haskell modules get searched for with hsopen
+#type is text
+#data matches '[A-Z][a-z]+\.([A-Z][a-z]+\.?)+'
+#plumb start hsopen $0 $wdir
 
 # sqlite3 databases get their own shell
-type is text
-data matches '\.?sqlite'
-arg isfile $0
-plumb start win sqlite3 -header $file
+#type is text
+#data matches '\.?sqlite'
+#arg isfile $0
+#plumb start win sqlite3 -header $file
+
 
 # email addresses get a new mail window
-type is text
-data matches '[a-zA-Z0-9_+.\-]+@[a-zA-Z0-9_+.\-]*'
-plumb to sendmail
-plumb start thunderbird -compose $0
+#type is text
+#data matches '[a-zA-Z0-9_+.\-]+@[a-zA-Z0-9_+.\-]*'
+#plumb to sendmail
+#plumb start thunderbird -compose $0
+
 
 # urls go to web browser
 type is text
-data matches '(https?|ftp|file|gopher|mailto|news|nntp|telnet|wais|prospero)://[a-zA-Z0-9_@\-]+([.:][a-zA-Z0-9_@\-]+)*/?[a-zA-Z0-9_?,%#~&/\-+=]+([:.][a-zA-Z0-9_?,%#~&/\-+=]+)*'
+data matches '(https?|ftp|gopher|mailto|news|nntp|telnet|wais|prospero)://[a-zA-Z0-9_@\-]+([.:][a-zA-Z0-9_@\-]+)*/?[a-zA-Z0-9_?,%#~&/\-+=]+([:.][a-zA-Z0-9_?,%#~&/\-+=]+)*'
 plumb to web
 plumb start web $0
 
-# image files go to eye of gnome <bleh>
+# local urls go to web browser
+type is text
+data matches 'file://*.html$'
+plumb to web
+plumb start web $0
+
+
+# image files get opened with preview
 type is text
 data matches '[a-zA-Z¡-￿0-9_\-./]+'
 data matches '([a-zA-Z¡-￿0-9_\-./]+)\.(jpe?g|JPE?G|gif|GIF|tiff?|TIFF?|ppm|bit|png|PNG)'
 arg isfile	$0
 plumb to image
-plumb start eog $file
+plumb start open $file
 
-# movies go to mplayer
+# movies
 type is text
 data matches '[a-zA-Z¡-￿0-9_\-./]+'
 data matches '([a-zA-Z¡-￿0-9_\-./]+)\.(avi|AVI|flv|mpe?g|MPE?G|mp4|MP4)'
 arg isfile	$0
 plumb to movie
-plumb start mplayer $file
+plumb start openr $file
 
-# postscript/pdf/dvi go to evince
+# postscript/pdf/dvi
 type is text
 data matches '[a-zA-Z¡-￿0-9_\-./]+'
 data matches '([a-zA-Z¡-￿0-9_\-./]+)\.(ps|PS|eps|EPS|pdf|PDF|dvi|DVI)'
 arg isfile	$0
-plumb start evince $file
+plumb start open $file
 
 # existing files, possibly tagged by line number, go to editor
 type is text

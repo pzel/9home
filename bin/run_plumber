@@ -1,4 +1,4 @@
 #!/bin/sh
-. $HOME/bin/p9env
+# . $HOME/bin/p9env
 
-cd $HOME && plumber 1>&2 > /dev/null
+cd $HOME && 9 plumber 1>&2 > /dev/null

@@ -1,7 +1,7 @@
 #!/bin/sh
-. $HOME/bin/p9env
+# . $HOME/bin/p9env
 
-run_fontsrv
+# run_fontsrv
 run_plumber
 
 ACME_MOUNT=/tmp/$USER.acmefs
@@ -11,9 +11,8 @@ if [ -f $HOME/acme.dump ] ; then
   DUMPCMD="-l $HOME/acme.dump"
 fi
 
-SHELL=rc
-FIXFONT="/mnt/font/DejaVu Sans Mono/9a/font"
-#VARFONT="/tmp/fontsrv/Droid Sans/10a/font"
+SHELL=/bin/bash --rcfile $HOME/.profile
+FIXFONT=$PLAN9/font/lucsans/typeunicode.7.font  export FIXFONT
+VARFONT=$PLAN9/font/lucsans/unicode.8.font export VARFONT
 
-sleep 1 && xseticon -name acme $HOME/lib/acme.png &
 shell=$SHELL acme -a -f "$FIXFONT" -F "$FIXFONT" $DUMPCMD -m $ACME_MOUNT && killall plumber
