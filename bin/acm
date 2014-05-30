@@ -1,19 +1,22 @@
 #!/bin/sh
 
 DUMPFILE="$1"
-# run_fontsrv
+run_fontsrv
 run_plumber
 
-ACME_MOUNT=/tmp/$USER.acmefs
-mkdir -p $ACME_MOUNT
+# ACME_MOUNT=/tmp/$USER.acmefs
+# mkdir -p $ACME_MOUNT
 
 if [ -f "$DUMPFILE" ] ; then
   DUMPCMD="-l $DUMPFILE"
 fi
 
-SHELL=/bin/bash --rcfile $HOME/.profile
-FIXFONT=$PLAN9/font/lucsans/typeunicode.7.font  export FIXFONT
+SHELL=/bin/bash
+acmeshell=/bin/bash export acmeshell
+# FIXFONT=$PLAN9/font/lucsans/typeunicode.7.font  export FIXFONT
+FIXFONT=/mnt/font/Menlo-Regular/14a/font export FIXFONT
 VARFONT=$PLAN9/font/lucsans/unicode.8.font export VARFONT
-INSIDE_ACME=true export INSIDE_ACME
 
-shell=$SHELL acme -a -f "$FIXFONT" -F "$FIXFONT" $DUMPCMD -m $ACME_MOUNT && killall plumber
+INSIDE_ACME=true export INSIDE_ACME
+EDITOR=E export EDITOR
+shell=$SHELL acme -a -f "$FIXFONT" -F "$FIXFONT" $DUMPCMD && killall plumber
