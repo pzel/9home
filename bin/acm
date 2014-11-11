@@ -14,9 +14,8 @@ fi
 SHELL=/bin/bash
 acmeshell=/bin/bash export acmeshell
 # FIXFONT=$PLAN9/font/lucsans/typeunicode.7.font  export FIXFONT
-FIXFONT=/mnt/font/Menlo-Regular/14a/font export FIXFONT
+FIXFONT=/mnt/font/'DejaVu Sans Mono'/10a/font export FIXFONT
 VARFONT=$PLAN9/font/lucsans/unicode.8.font export VARFONT
-
 INSIDE_ACME=true export INSIDE_ACME
 EDITOR=E export EDITOR
 shell=$SHELL acme -a -f "$FIXFONT" -F "$FIXFONT" $DUMPCMD && killall plumber

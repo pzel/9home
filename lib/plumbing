@@ -39,13 +39,13 @@ data matches 'file://*.html$'
 plumb to web
 plumb start web $0
 
-# image files get opened with preview
+# image files get oed with preview
 type is text
 data matches '[a-zA-Z¡-￿0-9_\-./]+'
 data matches '([a-zA-Z¡-￿0-9_\-./]+)\.(jpe?g|JPE?G|gif|GIF|tiff?|TIFF?|ppm|bit|png|PNG)'
 arg isfile	$0
 plumb to image
-plumb start open $file
+plumb start o $file
 
 # movies
 type is text
@@ -53,14 +53,14 @@ data matches '[a-zA-Z¡-￿0-9_\-./]+'
 data matches '([a-zA-Z¡-￿0-9_\-./]+)\.(avi|AVI|flv|mpe?g|MPE?G|mp4|MP4)'
 arg isfile	$0
 plumb to movie
-plumb start openr $file
+plumb start o $file
 
 # postscript/pdf/dvi
 type is text
 data matches '[a-zA-Z¡-￿0-9_\-./]+'
 data matches '([a-zA-Z¡-￿0-9_\-./]+)\.(ps|PS|eps|EPS|pdf|PDF|dvi|DVI)'
 arg isfile	$0
-plumb start open $file
+plumb start o $file
 
 # existing files, possibly tagged by line number, go to editor
 type is text
